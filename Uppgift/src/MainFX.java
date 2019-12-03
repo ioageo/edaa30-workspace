@@ -74,7 +74,8 @@ public class MainFX extends Application {
 //			}
 //		}
 //			
-		
+		if(true)
+			;
 		
 
 		for (int y = 0; y < 9; y++) {
