@@ -1,9 +1,7 @@
 
 public class soduku_class {
 	public  int[][] sudokuMatrix= new  int [9][9];
-	/**
-	 * @param args
-	 */
+	
 	
 	soduku_class (int[][] a) {
 		for(int i=0;i<a.length;i++) {
@@ -12,66 +10,6 @@ public class soduku_class {
 			}
 		}
 	}
-	
-
-
-//	/**
-//	 * @param put en (sudoku) matrix 
-//	 * @return true if matrix is ok 
-//	 */
-//	static boolean test(int[][] matrix) {
-//		for (int x = 0; x < 9; x++) {
-//			for (int y = 0; y < 9; y++) {
-//				int i = matrix[x][y];
-//				for (int k = 0; k < 9; k++) {
-//					if (k == x || k == y) {
-//						continue;
-//					}else if (matrix[k][x] == i || matrix[y][k] == i) {
-//						return false;
-//					}
-//						
-//
-//				}
-//				
-//				
-//			}
-//		}
-//		return true;
-//
-//	}
-///*
-// * Print out a matrix 9*9
-// */
-//	static void show(int[][] matrix) {
-//		int[] num = { 0, 1, 2, 3, 4, 5, 6, 7, 8, };
-//		for (int x : num) {
-//			for (int y : num) {
-//				System.out.print(matrix[x][y] + " ");
-//			}
-//			System.out.println();
-//		}
-//	}
-//
-//
-//
-
-
-
-	
-		
-//	/**
-//	 * Returns the element in the sudoku matrix.
-//	 * @param i row in the sudoku matrix.
-//	 * @param j column in the sudoku matrix.
-//	 * @return the number on the row i and column j.
-//	 */
-//	public int getNumber(int i, int j) {
-//		
-//		return sudokuMatrix[i][j];
-//		
-//	}
-//	
-	
 	
 	/**
 	 * Solves the puzzle, if it could be solved .
