@@ -26,94 +26,75 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.stage.FileChooser;
-import javafx.stage.FileChooser.ExtensionFilter;
+
 import javafx.stage.Stage;
 
 public class MainFX extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		
+		String color = "orange";
+
 		int[][] matrix = new int[9][9];
-		int[] num = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-		int i = 0;
-		int vol = 1;
-		for (int y = 0; y < 9; y++) {
-			for (int x = 0; x < 9; x++) {
-				
-				matrix[x][y] = num[i];
-				i = (i + 1) % 9;
-			}
-			i = vol;
-			vol++;
-		}
+
 		
+//
+//		for (int y = 0; y < 9; y++) {
+//			for (int x = 0; x < 9; x++) {
+//
+//				matrix[x][y] = 0;
+//
+//			}
+//		}
+		matrix [0][0]=5;
 		
-		
-		
+
 		/*
 		 * Initiate screen
 		 */
-		GridPane grid =new GridPane();
-		grid.setPadding(new Insets(5,5,5,5));
+		GridPane grid = new GridPane();
+		grid.setPadding(new Insets(5, 5, 5, 5));
 		grid.setVgap(1);
 		grid.setHgap(1);
-		
-		TextField[][] textMatrix = new TextField[9][9] ;
-		
-	
-		
-//		for (int y = 0; y < 9; y++) {
-//			for (int x = 0; x < 9; x++) {
-//				textMatrix[x][y].setText("5");
-//				//setText(String.valueOf(matrix[x][y]));
-//				textMatrix[x][y].setEditable(true);
-//				textMatrix[x][y].setPrefSize(90, 90);
-//			}
-//		}
-//			
-		if(true)
-			;
-		
 
+		TextField[][] textMatrix = new TextField[9][9];
 		for (int y = 0; y < 9; y++) {
 			for (int x = 0; x < 9; x++) {
-				TextField  t = new TextField ();
+				TextField t = new TextField();
 				t.setEditable(true);
-				t.setPrefSize(90, 90);
-				t.appendText(  String.valueOf(matrix[x][y])  );
-        	  GridPane.setConstraints(t,x,y);
-        	  grid.getChildren().add(t);
-			}
-		}
-		for (int y = 0; y < 9; y++) {
-			for (int x = 0; x < 9; x++) {
+				t.setPrefSize(100, 100);
+				if (matrix[y][x]!=0)
+				t.setText(String.valueOf(matrix[y][x]));
+				if (y / 3 == 0 && x / 3 != 1 || y / 3 == 2 && x / 3 != 1 || y / 3 == 1 && x / 3 == 1)
+					t.setStyle("-fx-control-inner-background: " + color + ";");
 				
-        	  GridPane.setConstraints(textMatrix[x][y],x,y);
-        	  grid.getChildren().add(textMatrix[x][y]);
+				textMatrix[y][x] = t;
+				GridPane.setConstraints(textMatrix[y][x], y, x);
+				grid.getChildren().add(textMatrix[y][x]);
+
 			}
 		}
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+
 		VBox box = new VBox();
 
-		
-		
 		BorderPane root = new BorderPane();
 
 		Button solve = new Button("Solution");
+		solve.setOnAction(Event->{
+			soduku_class sol= new soduku_class(matrix);
+			int [][] mat=sol.SolvedMatrix();
+			for (int y = 0; y < 9; y++) {
+				for (int x = 0; x < 9; x++) {
+					TextField t = new TextField();
+					t.setPrefSize(100, 100);
+					if (y / 3 == 0 && x / 3 != 1 || y / 3 == 2 && x / 3 != 1 || y / 3 == 1 && x / 3 == 1)
+						t.setStyle("-fx-control-inner-background: " + color + ";");
+					t.setText(String.valueOf(mat[y][x]));
+					GridPane.setConstraints(t, y, x);
+					grid.getChildren().add(t);
+				}}
+			
+		});
 		box.getChildren().add(solve);
 		root.setRight(box);
 		root.setCenter(grid);
