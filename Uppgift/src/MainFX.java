@@ -1,12 +1,10 @@
-import java.awt.Font;
-
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
@@ -28,6 +26,9 @@ public class MainFX extends Application {
 		grid.setVgap(1);
 		grid.setHgap(1);
 		
+		/*
+		 * initial screen 
+		 */
 		for (int y = 0; y < 9; y++) {
 			for (int x = 0; x < 9; x++) {
 
@@ -45,11 +46,20 @@ public class MainFX extends Application {
 					int nbr;
 					try {
 						nbr = Integer.parseInt(s);
-						if (nbr < 1 || nbr > 9) {
+						ExtraMethod em = new ExtraMethod();
+						if (nbr < 1 || nbr > 9 || !em.colrow(matrix, nbr, b, a) ) {
+							Alert al = new Alert(AlertType.INFORMATION);
+							al.setContentText("You wrote wrong number ");
+							al.setHeaderText("ERROR");
+							al.show();
 							t.clear();
 							nbr = 0;
 						}
 					} catch (NumberFormatException nfe) {
+						Alert al = new Alert(AlertType.INFORMATION);
+						al.setContentText("I want only digits ");
+						al.setHeaderText("ERROR");
+						al.show();
 						t.clear();
 						nbr = 0;
 					}
@@ -73,6 +83,8 @@ public class MainFX extends Application {
 		solve.setMaxWidth(Double.MAX_VALUE);
 		Button clear = new Button("Clear");
 		clear.setMaxWidth(Double.MAX_VALUE);
+		
+		
 		solve.setOnAction(Event -> {
 
 			soduku_class sol = new soduku_class(matrix);
