@@ -75,20 +75,21 @@ public class MainFX extends Application {
 			}
 		}
 
-		VBox box = new VBox();
+		
 
 		BorderPane root = new BorderPane();
 
 		Button solve = new Button("Solution");
 		solve.setMaxWidth(Double.MAX_VALUE);
+		solve.setMinWidth(75);
 		Button clear = new Button("Clear");
 		clear.setMaxWidth(Double.MAX_VALUE);
-		
+		clear.setMinWidth(75);
 		
 		solve.setOnAction(Event -> {
-
 			soduku_class sol = new soduku_class(matrix);
 			int[][] mat = sol.SolvedMatrix();		
+			if(mat!=null) {
 			grid.getChildren().clear();
 			grid.setPadding(new Insets(5, 5, 5, 5));
 			grid.setVgap(1);
@@ -102,9 +103,15 @@ public class MainFX extends Application {
 					t.setText(String.valueOf(mat[y][x]));
 					GridPane.setConstraints(t, y, x);
 					grid.getChildren().add(t);
+					}
 				}
+			}else {
+				Alert al = new Alert(AlertType.INFORMATION);
+				al.setContentText("This Soduku has no solution ");
+				al.setHeaderText("ERROR");
+				al.show();
+				
 			}
-
 		});
 		
 		
@@ -152,8 +159,9 @@ public class MainFX extends Application {
 				
 			
 		});
-		box.getChildren().addAll(solve,clear);
-		root.setRight(box);
+		VBox vbox = new VBox();
+		vbox.getChildren().addAll(clear,solve);
+		root.setRight(vbox);
 		root.setCenter(grid);
 		Scene scene = new Scene(root, 500, 500);
 		primaryStage.setTitle("Sudoku");

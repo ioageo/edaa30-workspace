@@ -19,7 +19,7 @@ public class soduku_class {
 		solve(0, 0);
 	}
 
-	private boolean check(int[][] matrix) {		
+	public boolean check(int[][] matrix) {		
 		for (int x = 0; x < 9; x++) {
 			for (int y = 0; y < 9; y++) {
 				int nbr = matrix[x][y];
